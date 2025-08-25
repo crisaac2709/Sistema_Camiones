@@ -1,0 +1,70 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}CamionesRegistro{% endblock %}</title>
+
+  <!-- Favicon si tienes -->
+  <link rel="icon" href="{% static 'image/favicon.png' %}">
+
+  <!-- Estilos base -->
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  {% block extra_css %}{% endblock %}
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <a href="#" class="logo">
+        <!-- Puedes reemplazar por imagen -->
+        <span class="logo-dot"></span>
+        <span>Camiones<span class="accent">Registro</span></span>
+      </a>
+    </div>
+
+    <nav class="nav">
+      <a href="#" class="nav-link {% block nav_home %}{% endblock %}">Inicio</a>
+      <a href="#" class="nav-link">Rutas</a>
+      <a href="#" class="nav-link">Camiones</a>
+      <a href="#" class="nav-link">Asignaciones</a>
+      <a href="#" class="nav-link">Reportes</a>
+    </nav>
+
+    <div class="userbox">
+      {% if request.user.is_authenticated %}
+        <div class="user">
+          <div class="avatar">{{ request.user.first_name|first|default:"U" }}</div>
+          <div class="meta">
+            <span class="name">{{ request.user.get_full_name|default:request.user.username }}</span>
+            <span class="role">{{ request.user.rol|default:"—" }}</span>
+          </div>
+        </div>
+        <a class="btn small" href="{% url 'cuentas:login' %}">Salir</a>
+      {% else %}
+        <a class="btn small" href="#">Ingresar</a>
+        <a class="btn small outline" href="#">Crear cuenta</a>
+      {% endif %}
+    </div>
+  </header>
+
+  <!-- Mensajes de Django -->
+  {% if messages %}
+  <div class="messages">
+    {% for m in messages %}
+      <div class="msg {{ m.tags }}">{{ m }}</div>
+    {% endfor %}
+  </div>
+  {% endif %}
+
+  <main class="container">
+    {% block content %}{% endblock %}
+  </main>
+
+  <footer class="foot">
+    <p>© {{ now|date:"Y" }} CamionesRegistro — Optimiza salidas y rutas de camiones.</p>
+  </footer>
+
+  {% block extra_js %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,106 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Login</title>
+
+  <!-- Solo define aquí la imagen del lado izquierdo -->
+  <style>
+    :root { --hero-url: url("{% static 'image/login.jpg' %}"); }
+  </style>
+
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+  <main class="auth">
+    <!-- ILUSTRACIÓN IZQUIERDA -->
+    <section class="left">
+      <div class="illustration" aria-label="login illustration"></div>
+    </section>
+
+    <!-- TARJETA DE LOGIN -->
+    <section class="right">
+      <div class="card">
+        <h1>Welcome back</h1>
+        <p class="subtitle">Inicia sesión para continuar</p>
+
+        <!-- OAuth (opcional) -->
+        <div class="oauth-row">
+          <a href="#" class="btn oauth">
+            <!-- Google -->
+            <svg viewBox="0 0 48 48" class="icon" aria-hidden="true">
+              <path fill="#FFC107" d="M43.6 20.1H42V20H24v8h11.3C33.6 31.9 29.2 35 24 35 16.8 35 11 29.2 11 22S16.8 9 24 9c3.6 0 6.9 1.4 9.3 3.6l5.7-5.7C35.6 3.1 30.1 1 24 1 10.7 1 0 11.7 0 25s10.7 24 24 24c12.4 0 23-9.1 23-24 0-1.6-.2-3.2-.4-4.9z"/>
+              <path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.4 16.2 18.9 13 24 13c3.6 0 6.9 1.4 9.3 3.6l5.7-5.7C35.6 3.1 30.1 1 24 1 16 1 9 5.3 6.3 14.7z"/>
+              <path fill="#4CAF50" d="M24 49c6 0 11.5-2 15.6-5.4l-7.2-5.8C30 39.9 27.2 41 24 41c-5.2 0-9.6-3.1-11.3-7.4l-6.5 5C9 44.9 15.9 49 24 49z"/>
+              <path fill="#1976D2" d="M43.6 20.1H42V20H24v8h11.3c-1.4 3.3-4.4 5.9-7.9 6.8l7.2 5.8C38.1 38 41 32.5 41 25c0-1.6-.2-3.2-.4-4.9z"/>
+            </svg>
+            <span>Continuar con Google</span>
+          </a>
+
+          <a href="#" class="btn oauth">
+            <!-- GitHub -->
+            <svg viewBox="0 0 24 24" class="icon" aria-hidden="true">
+              <path fill="currentColor" d="M12 .5A12 12 0 0 0 8.2 23.9c.6.1.8-.26.8-.58v-2.02c-3.34.73-4.04-1.61-4.04-1.61-.55-1.38-1.33-1.75-1.33-1.75-1.09-.74.08-.73.08-.73 1.2.09 1.84 1.24 1.84 1.24 1.07 1.84 2.81 1.31 3.5 1 .11-.79.42-1.31.76-1.61-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.12-.3-.53-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 0 1 6 0c2.29-1.55 3.3-1.23 3.3-1.23.65 1.66.24 2.88.12 3.18.77.84 1.24 1.91 1.24 3.22 0 4.6-2.8 5.63-5.48 5.93.43.37.81 1.1.81 2.22v3.29c0 .32.22.7.83.58A12 12 0 0 0 12 .5Z"/>
+            </svg>
+            <span>Continuar con GitHub</span>
+          </a>
+        </div>
+
+        <div class="divider"><span>o con tu email</span></div>
+
+        <!-- ERRORES DJANGO -->
+        {% if form and form.errors %}
+          <div class="errors">
+            {% for field, errs in form.errors.items %}
+              <p><b>{{ field|capfirst }}:</b> {{ errs|striptags }}</p>
+            {% endfor %}
+            {% for e in form.non_field_errors %}<p>{{ e }}</p>{% endfor %}
+          </div>
+        {% endif %}
+
+        <!-- FORM -->
+        <form class="form" method="post" id="form">
+          {% csrf_token %}
+
+          <div class="field">
+            <label for="username">Correo o usuario</label>
+            <input id="username" name="username" type="text" placeholder="tu@email.com"
+                   required autocomplete="username">
+            <p class="mensaje"></p>
+          </div>
+
+          <div class="field">
+            <label for="password">Contraseña</label>
+            <input id="password" name="password" type="password" placeholder="••••••••"
+                   required autocomplete="current-password" minlength="8">
+            <p class="mensaje"></p>
+          </div>
+
+          <div class="row">
+            <label class="check">
+              <input type="checkbox" name="remember"> <span>Recordarme</span>
+            </label>
+            <a class="link" href="#">¿Olvidaste tu contraseña?</a>
+          </div>
+
+          <button class="btn primary" type="submit">Iniciar sesión</button>
+        </form>
+
+        <p class="footnote">
+          ¿No tienes cuenta?
+          <a href="{% url 'cuentas:registro' %}" class="link">Crear cuenta</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    window.URLS = {
+        api_login: "{% url 'cuentas:login_api' %}"
+    }
+  </script>
+  <script src="{% static 'js/login.js'  %}"></script>
+</body>
+</html>

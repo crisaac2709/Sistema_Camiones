@@ -1,0 +1,157 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sign Up</title>
+  <style>
+  :root {
+    --hero-url: url("{% static 'image/registro.png' %}");
+  }
+</style>
+  <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+</head>
+<body>
+  <main class="auth">
+    <!-- LADO IZQUIERDO (ilustración) -->
+    <section class="left">
+      <div class="illustration" aria-label="signup illustration"></div>
+    </section>
+
+    <!-- LADO DERECHO (formulario) -->
+    <section class="right">
+      <div class="card">
+        <h1>Sign Up</h1>
+        <p class="subtitle">Únete a la comunidad con acceso permanente y gratis</p>
+
+        <!-- Botones sociales (opcional) -->
+        <div class="oauth-row">
+          <a href="#" class="btn oauth">
+            <svg viewBox="0 0 48 48" class="icon" aria-hidden="true">
+              <path fill="#FFC107" d="M43.611 20.083H42V20H24v8h11.303C33.572 31.91 29.197 35 24 35 16.82 35 11 29.18 11 22S16.82 9 24 9c3.589 0 6.86 1.358 9.343 3.571l5.657-5.657C35.597 3.087 30.084 1 24 1 10.745 1 0 11.745 0 25s10.745 24 24 24c12.426 0 23-9.074 23-24 0-1.61-.177-3.167-.389-4.917z"/>
+              <path fill="#FF3D00" d="M6.306 14.691l6.571 4.815C14.41 16.184 18.854 13 24 13c3.589 0 6.86 1.358 9.343 3.571l5.657-5.657C35.597 3.087 30.084 1 24 1 16.003 1 9.043 5.31 6.306 14.691z"/>
+              <path fill="#4CAF50" d="M24 49c6.008 0 11.466-1.993 15.553-5.409l-7.166-5.84C29.992 39.915 27.16 41 24 41c-5.168 0-9.558-3.102-11.28-7.446l-6.52 5.02C8.976 44.911 15.94 49 24 49z"/>
+              <path fill="#1976D2" d="M43.611 20.083H42V20H24v8h11.303c-1.353 3.282-4.341 5.866-7.916 6.751l7.166 5.84C38.136 37.996 41 32.5 41 25c0-1.61-.177-3.167-.389-4.917z"/>
+            </svg>
+            <span>Sign Up with Google</span>
+          </a>
+
+          <a href="#" class="btn oauth">
+            <svg viewBox="0 0 24 24" class="icon" aria-hidden="true">
+              <path fill="currentColor" d="M12 .5a12 12 0 0 0-3.793 23.4c.6.11.82-.26.82-.58v-2.02c-3.338.73-4.04-1.61-4.04-1.61-.546-1.385-1.333-1.754-1.333-1.754-1.09-.744.083-.729.083-.729 1.206.085 1.84 1.238 1.84 1.238 1.072 1.837 2.812 1.307 3.496.999.108-.787.419-1.307.762-1.607-2.665-.303-5.466-1.333-5.466-5.933 0-1.31.469-2.381 1.236-3.221-.124-.303-.536-1.523.117-3.176 0 0 1.008-.322 3.303 1.23a11.51 11.51 0 0 1 6.006 0c2.294-1.552 3.301-1.23 3.301-1.23.655 1.653.243 2.873.12 3.176.77.84 1.235 1.911 1.235 3.221 0 4.61-2.804 5.628-5.476 5.924.43.37.814 1.102.814 2.222v3.295c0 .324.218.697.826.579A12 12 0 0 0 12 .5Z"/>
+            </svg>
+            <span>Sign Up with GitHub</span>
+          </a>
+        </div>
+
+        <div class="divider">
+          <span>o con tu email</span>
+        </div>
+
+        <!-- ERRORES DEL FORM -->
+        {% if form and form.errors %}
+          <div class="errors">
+            {% for field, errs in form.errors.items %}
+              <p><b>{{ field|capfirst }}:</b> {{ errs|striptags }}</p>
+            {% endfor %}
+            {% for e in form.non_field_errors %}<p>{{ e }}</p>{% endfor %}
+          </div>
+        {% endif %}
+
+        <!-- FORMULARIO DJANGO -->
+        <form class="form" method="post" enctype="multipart/form-data" autocomplete="on" id="form">
+          {% csrf_token %}
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="first_name">Nombres</label>
+              <input id="first_name" name="first_name" type="text" placeholder="Luis" maxlength="150" autocomplete="given-name">
+                <p class="mensaje"></p>
+            </div>
+            <div class="field">
+              <label for="last_name">Apellidos</label>
+              <input id="last_name" name="last_name" type="text" placeholder="Suarez" maxlength="150" autocomplete="family-name">
+                <p class="mensaje"></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="username">Usuario <span>*</span></label>
+            <input id="username" name="username" type="text" placeholder="tu_usuario" required maxlength="150" autocomplete="username">
+            <p class="mensaje"></p>
+          </div>
+
+          <div class="field">
+            <label for="email">Correo <span>*</span></label>
+            <input id="email" name="email" type="email" placeholder="correo@dominio.com" required autocomplete="email">
+            <p class="mensaje"></p>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="password1">Contraseña <span>*</span></label>
+                <input id="password1" name="password1" type="password" placeholder="Mín. 8 caracteres" required autocomplete="new-password" minlength="8">
+                <p class="mensaje"></p>
+            </div>
+            <div class="field">
+              <label for="password2">Repetir contraseña <span>*</span></label>
+                <input id="password2" name="password2" type="password" placeholder="Mín. 8 caracteres" required autocomplete="new-password" minlength="8">
+                <p class="mensaje"></p>
+            </div>
+          </div>
+
+          <div class="grid-2">
+            <div class="field">
+              <label for="cedula">Cedula</label>
+              <input id="cedula" name="cedula" type="text" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="0954234548">
+              <p class="mensaje"></p>
+            </div>
+            <div class="field">
+              <label for="telefono">Teléfono</label>
+              <input id="telefono" name="telefono" type="text" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="0999999999" autocomplete="tel">
+              <p class="mensaje"></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="fecha_nacimiento">Fecha de nacimiento</label>
+            <input id="fecha_nacimiento" name="fecha_nacimiento" type="date" max="2099-12-31">
+            <p class="mensaje"></p>
+          </div>
+
+          <div class="field">
+            <label>Rol</label>
+            <select name="rol" required>
+              <option value="guardia">Guardia</option>
+              <option value="admin">Administrador</option>
+            </select>
+          </div>
+
+          <div class="field">
+            <label for="foto">Foto (opcional)</label>
+            <input id="foto" name="foto" type="file" accept="image/*">
+            <div class="preview" id="preview"></div>
+          </div>
+
+          <button type="submit" class="btn primary">Crear cuenta</button>
+        </form>
+
+        <p class="footnote">
+          ¿Ya tienes cuenta?
+          <a href="{% url 'cuentas:login' %}" class="link">Login here</a>
+        </p>
+      </div>
+    </section>
+  </main>
+
+  <script>
+    window.URLS = {
+        api_registro: "{% url 'cuentas:api_registro' %}"
+    }
+  </script>
+  <script src="{% static 'js/validaciones.js'  %}"></script>
+  <script src="{% static 'js/registro.js'  %}"></script>
+</body>
+</html>

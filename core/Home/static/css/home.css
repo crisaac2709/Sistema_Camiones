@@ -1,0 +1,50 @@
+/* Hero */
+.hero{
+  display:grid; grid-template-columns: 1.2fr 1fr; gap:20px; align-items:center;
+  margin-bottom: 18px;
+}
+.hero-text h1{
+  margin:0 0 6px; font-size: clamp(26px, 3vw, 34px); letter-spacing:-.02em;
+}
+.lead{ color:#374151; margin:0 0 12px; }
+.hero-actions{ display:flex; gap:10px }
+.hero .btn.primary{ background:#0f172a; color:#fff }
+
+.hero-illustration{
+  min-height: 160px;
+  background: linear-gradient(180deg, #e5e7eb 0%, #ffffff 50%);
+  border:1px solid var(--border); border-radius:16px;
+  display:grid; place-items:center;
+}
+.hero-illustration .tree{
+  width: 88%; height: 120px; border-radius: 12px;
+  background: radial-gradient(80px 28px at 50% 0%, #c2fbd7 0 70%, transparent 70%) top center no-repeat,
+              linear-gradient(#9ca3af 0 0) bottom center / 90% 1px no-repeat;
+}
+
+/* KPIs */
+.kpi{ display:flex; flex-direction:column; gap:2px }
+.kpi-title{ font-size:12px; color:#6b7280; font-weight:700 }
+.kpi-value{ font-size:28px; font-weight:800; letter-spacing:-.02em }
+.kpi-foot{ font-size:12px }
+.kpi.alert .kpi-value{ color:#b91c1c }
+
+/* Quick list & Alerts */
+.quick{ list-style:none; padding:0; margin:0 }
+.quick li{ padding:8px 0; border-bottom:1px dashed #e5e7eb }
+.quick li:last-child{ border-bottom:none }
+.quick a{ text-decoration:none; color:#111827; font-weight:700 }
+.quick a:hover{ text-decoration:underline }
+
+.alerts{ display:grid; gap:10px }
+.alert-item{ border:1px solid var(--border); border-radius:12px; padding:12px; background:#fff }
+.alert-item.warn{ border-color:#fde68a; background:#fffbeb }
+.alert-item.error{ border-color:#fecaca; background:#fff5f5 }
+.alert-item strong{ display:block; margin-bottom:4px }
+
+/* Table card spacing already from base.css */
+
+/* Responsive */
+@media (max-width: 1024px){
+  .hero{ grid-template-columns:1fr }
+}

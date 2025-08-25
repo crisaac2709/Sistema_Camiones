@@ -1,0 +1,123 @@
+{% extends "layouts/base.html" %}
+{% load static %}
+{% block title %}Inicio • CamionesRegistro{% endblock %}
+{% block nav_home %}active{% endblock %}
+{% block extra_css %}<link rel="stylesheet" href="{% static 'css/home.css' %}">{% endblock %}
+
+{% block content %}
+<section class="hero">
+  <div class="hero-text">
+    <h1>Planifica y asigna rutas sin cuellos de botella</h1>
+    <p class="lead">
+      Reduce la <strong>falta de gestión y planificación</strong> en la salida de camiones:
+      visualiza capacidad, asigna rutas en segundos y detecta retrasos antes de que ocurran.
+    </p>
+    <div class="hero-actions">
+      <a href="#" class="btn primary">Nueva Asignación</a>
+      <a href="#" class="btn">Ver Rutas</a>
+    </div>
+  </div>
+  <div class="hero-illustration">
+    <!-- Si quieres, coloca una imagen aquí -->
+    <!-- <img src="{% static 'image/hero-camiones.png' %}" alt="Rutas de camiones"> -->
+    <div class="tree"></div>
+  </div>
+</section>
+
+<section class="kpis">
+  <div class="card kpi">
+    <span class="kpi-title">Camiones en cola</span>
+    <span class="kpi-value">3</span>
+    <span class="kpi-foot muted">Esperando salida</span>
+  </div>
+  <div class="card kpi">
+    <span class="kpi-title">Rutas con capacidad</span>
+    <span class="kpi-value">6</span>
+    <span class="kpi-foot muted">Disponibles para asignar</span>
+  </div>
+  <div class="card kpi">
+    <span class="kpi-title">Asignaciones hoy</span>
+    <span class="kpi-value">8</span>
+    <span class="kpi-foot muted">Turno actual</span>
+  </div>
+  <div class="card kpi alert">
+    <span class="kpi-title">Retrasos detectados</span>
+    <span class="kpi-value">20</span>
+    <span class="kpi-foot muted">Requieren atención</span>
+  </div>
+</section>
+
+<section class="grid-2">
+  <div class="card">
+    <div class="card-head">
+      <h2>Acciones rápidas</h2>
+    </div>
+    <ul class="quick">
+      <li><a href="#">➕ Crear asignación</a></li>
+      <li><a href="#">🚚 Registrar nuevo camión</a></li>
+      <li><a href="#">🧭 Crear ruta</a></li>
+      <li><a href="#">📊 Ver reportes</a></li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="card-head">
+      <h2>Alertas de planificación</h2>
+    </div>
+    <div class="alerts">
+      {% if alertas %}
+        {% for a in alertas %}
+          <div class="alert-item {{ a.level|default:'warn' }}">
+            <strong>{{ a.title }}</strong>
+            <p>{{ a.message }}</p>
+            {% if a.action_url %}
+              <a class="btn small" href="#">Resolver</a>
+            {% endif %}
+          </div>
+        {% endfor %}
+      {% else %}
+        <p class="muted">Sin alertas por ahora. ¡Buen trabajo!</p>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section class="card table-card">
+  <div class="card-head">
+    <h2>Próximas salidas</h2>
+    <a href="#"class="link">Ver todo</a>
+  </div>
+  <div class="table-wrap">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>Hora</th>
+          <th>Camión</th>
+          <th>Ruta</th>
+          <th>Conductor</th>
+          <th>Estado</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for it in proximas_salidas %}
+        <tr>
+          <td>{{ it.hora|default:"—" }}</td>
+          <td>{{ it.camion|default:"—" }}</td>
+          <td>{{ it.ruta|default:"—" }}</td>
+          <td>{{ it.conductor|default:"—" }}</td>
+          <td>
+            <span class="badge {{ it.estado|default:'pendiente' }}">{{ it.estado|default:"pendiente" }}</span>
+          </td>
+          <td class="actions">
+            <a class="btn small outline" href="#">Detalles</a>
+          </td>
+        </tr>
+        {% empty %}
+        <tr><td colspan="6" class="muted">No hay salidas programadas.</td></tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>
+{% endblock %}
