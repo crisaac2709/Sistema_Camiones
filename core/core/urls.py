@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('cuentas/', include('cuentas.urls', namespace='cuentas')),
     path('Home/', include('Home.urls', namespace='Home')),
+    path('vehiculos/', include('vehiculos.urls', namespace='vehiculos')),
 ]
 
 # Para servir archivos en desarrollo

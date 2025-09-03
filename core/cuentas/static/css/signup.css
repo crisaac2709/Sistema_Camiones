@@ -208,6 +208,15 @@ select{
 .mensaje.valido{ color:#16a34a; font-weight:500; }
 .mensaje.invalido{ color:#dc2626; font-weight:500; }
 
+#form-errors {
+  color: red;
+  margin: 10px 0;
+}
+#form-errors p {
+  margin: 4px 0;
+}
+
+
 @media (max-width: 560px){
   .grid-2{ grid-template-columns: 1fr; }
 }

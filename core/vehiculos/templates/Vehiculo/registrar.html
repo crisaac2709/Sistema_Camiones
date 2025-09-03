@@ -1,0 +1,37 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} <title>Formulario de Vehiculo</title> {% endblock %}
+
+{% load static %}
+{% block extra_css %} <link rel="stylesheet" href="{% static 'css/form.css' %}"> {% endblock %}
+
+{% block content %}
+
+    <form class="form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Registro de vehiculo</h1>
+        <p>Ingresa la informacion</p>
+
+        <div class="control-input">
+            <label for="placa">Placa</label>
+            {{form.placa}}
+            {{form.placa.errors}}
+        </div>
+
+        <div class="control-input">
+            <label for="chofer">Chofer</label>
+            {{form.chofer}}
+        </div>
+
+        <div class="control-input">
+            <label for="marca">Marca</label>
+            {{form.marca}}
+        </div>
+
+        <div class="botones">
+            <button type="submit">Registrar</button>
+            <a href="{% url 'vehiculos:listar_vehiculos' %}">Cancelar</a>
+        </div>
+    </form>
+
+{% endblock %}

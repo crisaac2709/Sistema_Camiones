@@ -7,7 +7,8 @@ from django.urls import reverse
 
 # Create your views here.
 def registro(request):
-    return render(request, 'registro.html')
+    form = CustomUserCreationForm()
+    return render(request, 'registro.html', {'form':form})
 
 @require_POST
 def api_registro(request):

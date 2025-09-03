@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{% block title %}CamionesRegistro{% endblock %}</title>
+  {% block title %}{% endblock %}
 
   <!-- Favicon si tienes -->
   <link rel="icon" href="{% static 'image/favicon.png' %}">
@@ -51,8 +51,8 @@
   <!-- Mensajes de Django -->
   {% if messages %}
   <div class="messages">
-    {% for m in messages %}
-      <div class="msg {{ m.tags }}">{{ m }}</div>
+    {% for message in messages %}
+      <div class="msg {{ message.tags }}">{{ message }}</div>
     {% endfor %}
   </div>
   {% endif %}

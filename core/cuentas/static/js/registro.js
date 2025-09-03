@@ -31,6 +31,13 @@
                 window.location.href = data.url
             } else {
                 console.log(data.errors);
+                const errorsDiv = document.getElementById('form-errors')
+                errorsDiv.innerHTML = ""
+
+                for (const [field, messages] of Object.entries(data.errors)) {
+                errorsDiv.innerHTML += `<p><b>${field}:</b> ${messages.join(", ")}</p>`;
+                }
+                console.log(errorsDiv)
             }
 
         } catch(err) {
