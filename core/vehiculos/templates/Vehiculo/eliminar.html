@@ -1,0 +1,29 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %}
+<title>Eliminar Conductor</title>
+{% endblock %}
+
+{% load static %}
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/eliminar.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="delete-container">
+    <div class="delete-card">
+        <h2>¿Estás seguro de eliminar este vehiculo?</h2>
+        <p><strong>Placa{{ vehiculo.placa }}</strong></p>
+
+        <form method="post">
+            {% csrf_token %}
+            <div class="actions">
+                <button type="submit" class="btn eliminar">Sí, eliminar</button>
+                <a href="{% url 'vehiculos:listar_vehiculos' %}" class="btn cancelar">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

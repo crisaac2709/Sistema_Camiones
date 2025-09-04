@@ -1,0 +1,138 @@
+/* --- CONTENEDOR GENERAL --- */
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+}
+
+.nuevo {
+    border: 1px solid #a8aaae;
+    font-weight: bold;
+    padding: 5px 15px;
+    text-decoration: none;
+    color: #0f172a;
+    border-radius: 0.4rem;
+    transition: 0.4s all;
+}
+
+.nuevo:hover { box-shadow: 0 5px 10px rgba(0,0,0,0.1);}
+
+
+
+/* --- TABLA PRINCIPAL --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #ffffff;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: 'Segoe UI', Tahoma, sans-serif;
+}
+
+/* --- CABECERA --- */
+thead {
+  background: #0f172a;   /* Azul oscuro */
+  color: #ffffff;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  font-size: 14px;
+}
+
+thead th {
+  padding: 14px 16px;
+  text-align: left;
+}
+
+/* --- FILAS --- */
+tbody tr {
+  border-bottom: 1px solid #e5e7eb; /* gris claro */
+  transition: background 0.3s ease;
+}
+
+tbody tr:hover {
+  background: #f1f5f9; /* gris muy claro al pasar */
+}
+
+/* --- CELDAS --- */
+tbody td {
+  padding: 12px 16px;
+  font-size: 15px;
+  color: #1e293b; /* gris oscuro */
+}
+
+/* --- FILA VACÍA --- */
+tbody tr td[colspan] {
+  text-align: center;
+  padding: 20px;
+  font-style: italic;
+  color: #64748b; /* gris medio */
+}
+
+/* --- EFECTO EN ID --- */
+tbody td:first-child {
+  font-weight: bold;
+  color: #0ea5e9; /* celeste para destacar */
+}
+
+.acciones {
+    display: flex;
+    align-items: center;
+    
+}
+
+.acciones a{
+    text-decoration: none;
+    padding: 0.7rem;
+    color: #fff;
+    border-radius: 0.4rem;
+}
+
+.actualizar {
+    margin-right: 0.5rem;
+    background-color: #0ea5e9;
+    transition: 0.4s background-color;
+}
+
+.actualizar:hover {background-color: #31b6f3;}
+
+.eliminar {
+    background-color: #d52451;
+    transition: 0.4s background-color;
+}
+
+.eliminar:hover {background-color: #ed3261;}
+
+/* --- RESPONSIVE --- */
+@media (max-width: 700px) {
+  table, thead, tbody, th, td, tr {
+    display: block;
+  }
+  thead {
+    display: none;
+  }
+  tbody tr {
+    margin-bottom: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    padding: 10px;
+    background: #fff;
+  }
+  tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 12px;
+  }
+  tbody td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #334155;
+  }
+}

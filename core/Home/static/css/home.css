@@ -16,10 +16,11 @@
   border:1px solid var(--border); border-radius:16px;
   display:grid; place-items:center;
 }
-.hero-illustration .tree{
-  width: 88%; height: 120px; border-radius: 12px;
-  background: radial-gradient(80px 28px at 50% 0%, #c2fbd7 0 70%, transparent 70%) top center no-repeat,
-              linear-gradient(#9ca3af 0 0) bottom center / 90% 1px no-repeat;
+
+.hero-illustration img {
+  height: 300px;
+  width: 100%;
+  object-fit: cover;
 }
 
 /* KPIs */

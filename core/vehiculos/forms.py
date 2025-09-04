@@ -46,7 +46,7 @@ class ChoferForm(forms.ModelForm):
         if cedula and not cedula.isdigit():
             raise forms.ValidationError('La cedula debe contener solo numeros')
         
-        if cedula and not len(cedula) != 10:
+        if cedula and len(cedula) != 10:
             raise forms.ValidationError('Deben ser exactamente 10 digitos')
         
         return cedula

@@ -1,0 +1,52 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} <title>Listado de vehiculos</title> {% endblock %}
+
+{% load static %}
+{% block extra_css %} <link rel="stylesheet" href="{% static 'css/listar.css' %}"> {% endblock %}
+
+{% block content %}
+
+<div class="container">
+
+    <div class="head">
+        <h1>Listado de choferes registrados</h1>
+        <a class="nuevo" href="{% url 'vehiculos:registrar_conductor' %}">Nuevo</a>
+    </div>
+        
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nombres</th>
+                <th>Apellidos</th>
+                <th>Cedula</th>
+                <th>acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% if choferes %}
+                {% for chofer in choferes %}
+                <tr>
+                    <td>{{chofer.pk}}</td>
+                    <td>{{chofer.nombres}}</td>
+                    <td>{{chofer.apellidos}}</td>
+                    <td>{{chofer.cedula}}</td>
+                    <td>
+                        <div class="acciones">
+                            <a href="{% url 'vehiculos:actualizar_conductor' chofer.pk %}" class="actualizar">Actualizar</a>
+                            <a href="{% url 'vehiculos:eliminar_conductor' chofer.pk %}" class="eliminar">Eliminar</a>
+                        </div>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    No hay registros
+                </tr>
+            {% endif %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

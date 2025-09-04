@@ -12,6 +12,10 @@
   <!-- Estilos base -->
   <link rel="stylesheet" href="{% static 'css/base.css' %}">
   {% block extra_css %}{% endblock %}
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;700&display=swap" rel="stylesheet">
 </head>
 <body>
   <header class="topbar">
@@ -24,9 +28,9 @@
     </div>
 
     <nav class="nav">
-      <a href="#" class="nav-link {% block nav_home %}{% endblock %}">Inicio</a>
+      <a href="{% url 'Home:Home' %}" class="nav-link {% block nav_home %}{% endblock %}">Inicio</a>
       <a href="#" class="nav-link">Rutas</a>
-      <a href="#" class="nav-link">Camiones</a>
+      <a href="{% url 'vehiculos:listar_vehiculos' %}" class="nav-link">Vehiculos</a>
       <a href="#" class="nav-link">Asignaciones</a>
       <a href="#" class="nav-link">Reportes</a>
     </nav>

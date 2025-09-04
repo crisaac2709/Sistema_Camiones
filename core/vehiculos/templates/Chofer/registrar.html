@@ -1,0 +1,45 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} <title>Formulario de Conductor</title> {% endblock %}
+
+{% load static %}
+{% block extra_css %} <link rel="stylesheet" href="{% static 'css/form.css' %}"> {% endblock %}
+
+{% block content %}
+
+    <form class="form" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <h1>Registro de conductor</h1>
+        <p>Ingresa la informacion correspondiente</p>
+
+        <div class="control-input">
+            <label for="nombres">Nombres</label>
+            {{form.nombres}}
+            {{form.nombres.errors}}
+        </div>
+
+        <div class="control-input">
+            <label for="apellidos">Apelidos</label>
+            {{form.apellidos}}
+            {{form.apellidos.errors}}
+        </div>
+
+        <div class="control-input">
+            <label for="cedula">Cedula</label>
+            {{form.cedula}}
+            {{form.cedula.errors}}
+        </div>
+
+        <div class="control-input">
+            <label for="licencia">Licencia</label>
+            {{form.licencia}}
+            {{form.licencia.errors}}
+        </div>
+
+        <div class="botones">
+            <button type="submit">Registrar</button>
+            <a href="{% url 'vehiculos:listar_conductores' %}">Cancelar</a>
+        </div>
+    </form>
+
+{% endblock %}
